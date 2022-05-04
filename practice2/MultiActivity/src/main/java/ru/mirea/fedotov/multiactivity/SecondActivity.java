@@ -22,14 +22,11 @@ public class SecondActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivitySecondBinding binding;
-
-    private final String TAG = MultiActivity.class.getSimpleName();
+    private String TAG = MultiActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Log.i(TAG, "onCreate()");
 
         binding = ActivitySecondBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -40,7 +37,7 @@ public class SecondActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        binding.textView.setOnClickListener(new View.OnClickListener() {
+        binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -48,10 +45,11 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
-        TextView textView = findViewById(R.id.textView);
-        textView.setText((String) getIntent().getSerializableExtra("key"));
+        // У второй активности
+        String text = (String) getIntent().getSerializableExtra("key");
+        TextView textView2 = (TextView) findViewById(R.id.textView2);
+        textView2.setText(text);
     }
-
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_second);
